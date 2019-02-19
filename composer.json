@@ -26,6 +26,7 @@
         "symfony/yaml": "4.2.*"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.14",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "*",
@@ -66,6 +67,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "cs-fix": [
+            "vendor/bin/php-cs-fixer fix"
         ]
     },
     "conflict": {
