@@ -28,6 +28,19 @@ class TurnRepository extends ServiceEntityRepository
         parent::__construct($registry, Turn::class);
     }
 
+    public function add(Turn $turn)
+    {
+        $this->_em->persist($turn);
+        $this->_em->flush();
+    }
+
+    public function getLastTodayNumber(): int
+    {
+        return 1;
+    }
+
+
+
     // /**
     //  * @return Turn[] Returns an array of Turn objects
     //  */
