@@ -30,6 +30,16 @@ class Client
      */
     private $email;
 
+    private function __construct(){}
+
+    public static function withEmail(string $email)
+    {
+        $client = new self();
+        $client->setEmail($email);
+
+        return $client;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
