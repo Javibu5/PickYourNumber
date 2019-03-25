@@ -23,6 +23,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class TurnRepository extends ServiceEntityRepository
 {
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Turn::class);
@@ -36,7 +37,20 @@ class TurnRepository extends ServiceEntityRepository
 
     public function getLastTodayNumber(): int
     {
-        return 1;
+        $qb = $this->createQueryBuilder(t)
+           ->select('MAX(t.Turn)')
+            //select t.* from Turn
+            ->andWhere('t.createdAt > :today')
+            //where createdAt > today
+            ->setParameter('today' , new \DateTime('today'))
+            ->getQuery()
+            ;
+
+        $lastTurn = $qb->getSingleScalarResult();
+        if($lastTurn == null){
+            return 0;
+        }
+        return $lastTurn->getNumber();
     }
 
 
